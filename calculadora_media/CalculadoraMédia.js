@@ -20,6 +20,7 @@ function inputNotas() {
 
                     //Validação que verifica se as notas foram escritas como strings e se elas foram digitadas em valores de 0 a 10.
                     if (n1 > 10 || n2 > 10 || n3 > 10 || n4 > 10 || n1 < 0 || n2 < 0 || n3 < 0 || n4 < 0 || isNaN(n1) || isNaN(n2) || isNaN(n3) || isNaN(n4)){
+                        console.log();
                         console.log('=== Notas digitadas de maneira inválida! O sistema não aceitará textos e as notas precisam ser números entre 0 e 10! ===')
                         console.log('=== Digite suas notas novamente: ===');
                         console.log();
