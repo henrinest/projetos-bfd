@@ -50,6 +50,6 @@ function inputNotas() {
 
 notas.on('close', () => {
   console.log();
-  console.log('Finalizando aplicação');
+  console.log('Finalizando aplicação, obrigado!');
   process.exit(0);
 });
