@@ -1,0 +1,12 @@
+{
+  "name": "calculadora_media",
+  "version": "1.0.0",
+  "description": "",
+  "main": "CalculadoraMédia.js",
+  "scripts": {
+    "start": "node CalculadoraMédia.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
