@@ -4,8 +4,6 @@ const notas = readline.createInterface({
     output: process.stdout
 });
 
- inputNotas();
-
 //Criação da função para solicitação de múltiplas perguntas.
 function pergunta(questao) {
     return new Promise ((resolve) => {
@@ -30,18 +28,27 @@ async function inputNotas() {
         console.log();
         inputNotas();
     } else {
-
-        //Execução do cálculo de média.
-        media = (n1 + n2) / 2;
-        console.log();
-        console.log(`== Nota média = ${media} ==`);
-
-        if (media >= 7) {
-            console.log('== Situação: Aprovado(a). ==');
-            process.exit(0);
-        } else {
-            console.log('== Situação: Reprovado(a). ==');
-            process.exit(0);
-        }
+        calcMedia(n1, n2);
     }
 }
+
+function calcMedia(n1, n2) {
+    
+    //Execução do cálculo de média.
+    media = (n1 + n2) / 2;
+    console.log();
+    console.log(`== Nota média = ${media} ==`);
+
+    if (media >= 7) {
+         console.log('== Situação: Aprovado(a). ==');
+         console.log();
+         process.exit(0);
+     } else {
+        console.log('== Situação: Reprovado(a). ==');
+        console.log();
+        process.exit(0);
+    }
+    notas.close();
+}
+
+ inputNotas();
