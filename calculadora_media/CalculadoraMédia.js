@@ -15,8 +15,8 @@ function pergunta(questao) {
 
 //Solicitação de input das duas notas ao usuário.
 async function inputNotas() {
-    nota1 = await pergunta('Digite sua primeira nota: ');
-    nota2 = await pergunta('Digite sua segunda nota: ');
+    const nota1 = await pergunta('Digite sua primeira nota: ');
+    const nota2 = await pergunta('Digite sua segunda nota: ');
 
     const n1 = parseFloat(nota1);
     const n2 = parseFloat(nota2);
@@ -26,7 +26,7 @@ async function inputNotas() {
         console.log('=== Notas digitadas de maneira inválida! O sistema não aceitará textos e as notas precisam ser números entre 0 e 10! ===');
         console.log('=== Digite suas notas novamente: ===');
         console.log();
-        inputNotas();
+        return inputNotas();
     } else {
         calcMedia(n1, n2);
     }
@@ -35,18 +35,16 @@ async function inputNotas() {
 function calcMedia(n1, n2) {
     
     //Execução do cálculo de média.
-    media = (n1 + n2) / 2;
+    let media = (n1 + n2) / 2;
     console.log();
     console.log(`== Nota média = ${media} ==`);
 
     if (media >= 7) {
          console.log('== Situação: Aprovado(a). ==');
          console.log();
-         process.exit(0);
      } else {
         console.log('== Situação: Reprovado(a). ==');
         console.log();
-        process.exit(0);
     }
     notas.close();
 }
