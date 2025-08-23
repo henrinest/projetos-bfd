@@ -15,21 +15,35 @@ function pergunta(questao) {
 
 //Solicitação de input das duas notas ao usuário.
 async function inputNotas() {
-    const nota1 = await pergunta('Digite sua primeira nota: ');
-    const nota2 = await pergunta('Digite sua segunda nota: ');
+    let n1;
+    let n2;
 
-    const n1 = parseFloat(nota1);
-    const n2 = parseFloat(nota2);
+    let notaValida = false;
+    while (!notaValida) {
+        const nota1 = await pergunta('Digite sua primeira nota: ');
+        n1 = parseFloat(nota1);
 
-    if (n1 > 10 || n2 > 10 || n1 < 0 || n2 < 0 || isNaN(n1) || isNaN(n2)) {
-        console.log();
-        console.log('=== Notas digitadas de maneira inválida! O sistema não aceitará textos e as notas precisam ser números entre 0 e 10! ===');
-        console.log('=== Digite suas notas novamente: ===');
-        console.log();
-        return inputNotas();
+        if (n1 <= 10 && n1 >= 0 && !isNaN(n1)){
+            notaValida = true;
     } else {
-        calcMedia(n1, n2);
+        console.log ('Nota digitada de maneira inválida! O programa não aceitará textos, os valores precisam ser números entre 0 e 10.');
+        console.log ('----------------------------------------------------------------------------------------------------------------');
+        }
     }
+
+    notaValida = false;
+    while (!notaValida) {
+        const nota2 = await pergunta('Digite sua segunda nota: ');
+        n2 = parseFloat(nota2);
+
+        if (n2 <= 10 && n2 >= 0 && !isNaN(n2)){
+            notaValida = true;
+    } else {
+        console.log ('Nota digitada de maneira inválida! O programa não aceitará textos, os valores precisam ser números entre 0 e 10.');
+        console.log ('----------------------------------------------------------------------------------------------------------------');
+        }
+    }
+    calcMedia(n1, n2);
 }
 
 function calcMedia(n1, n2) {
