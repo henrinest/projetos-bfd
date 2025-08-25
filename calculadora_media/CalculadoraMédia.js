@@ -13,11 +13,12 @@ function pergunta(questao) {
     });
 };
 
-//Solicitação de input das duas notas ao usuário.
+//Função para solicitação das 2 notas.
 async function inputNotas() {
     let n1;
     let n2;
 
+    // Solicitação da primeira nota.
     let notaValida = false;
     while (!notaValida) {
         const nota1 = await pergunta('Digite sua primeira nota: ');
@@ -31,6 +32,7 @@ async function inputNotas() {
         }
     }
 
+    // Solicitação da segunda nota.
     notaValida = false;
     while (!notaValida) {
         const nota2 = await pergunta('Digite sua segunda nota: ');
@@ -46,6 +48,7 @@ async function inputNotas() {
     calcMedia(n1, n2);
 }
 
+// Função para realização do cálculo de média e exibição dos resultados.
 function calcMedia(n1, n2) {
     
     //Execução do cálculo de média.
