@@ -1,4 +1,3 @@
-const Filme = require('./filme');
 class Locadora {
     constructor () {
         this.filmesCadastrados = []

@@ -1,14 +1,18 @@
 //Exportação do readline e das classes para utilização no arquivo principal.
 const readline = require("readline");
-const Usuario = require('./usuario');
-const Livro = require('./livro');
-const Filme = require('./filme');
-const Locadora = require('./locadora');
-const Biblioteca = require('./biblioteca');
+const Usuario = require('./classes/usuario');
+const Livro = require('./classes/livro');
+const Filme = require('./classes/filme');
+const Locadora = require('./classes/locadora');
+const Biblioteca = require('./classes/biblioteca');
 
 //Criação dos objetos Biblioteca e Locadora, que não possuem atributos principais.
 const biblioteca = new Biblioteca();
 const locadora = new Locadora();
+
+let user;
+const usuariosCadastrados = []
+const usuarioAtual = user
 
 const main = readline.createInterface({
     input: process.stdin,
@@ -26,8 +30,8 @@ function pergunta(questao) {
 
 //Criação da função que expõe o menu de opções para o usuário da aplicação.
 async function menu() {
-    console.log(" \n=== Menu ===\n Cadastramento de usuário [1]\n Listar Livros [2]\n Listar Filmes [3]\n Empréstimo de itens [4]\n Cadastramento de itens [5]");
-    console.log(" Devolução de Livros [6]\n Devolução de Filmes [7]\n Listar itens emprestados pelo usuário [8]\n Sair [0]\n");
+    console.log(" \n=== Menu ===\n Cadastramento de usuário [1]\n Listar Livros [2]\n Listar Filmes [3]\n Empréstimo de livro [4]\n Empréstimo de filme [5]");
+    console.log(" Cadastrar itens [6]\n Devolução de Filmes [7]\n Listar livros emprestados pelo usuário [8]\n Listar filmes emprestados pelo usuário [9]\n Sair [0]\n");
     const resposta = await pergunta("[Selecione a opção]: ");
 
     switch (resposta) {
@@ -41,19 +45,22 @@ async function menu() {
             listarFilmes();
             break;
         case "4":
-
+            emprestarLivro()
             break;
         case "5":
-            cadastrarItens();
+            emprestarFilme();
             break;
         case "6":
-
+            cadastrarItens()
             break;
         case "7":
-
+            
             break;
         case "8":
-
+            listarUserLivros()
+            break;
+        case "9":
+            listarUserFilmes()
             break;
         case "0":
             main.close()
@@ -64,8 +71,6 @@ async function menu() {
 // Função para cadastro de usuário, o cadastro fica registrado como um objeto na classe "Usuario".
 async function usuarioCadastro() {
     const userName = await pergunta("Digite seu nome de usuário: ");
-    const usuariosCadastrados = []
-    let user;
 
     if (isNaN(userName)) {
         user = new Usuario(userName);
@@ -95,7 +100,7 @@ async function cadastrarItens() {
             const resposta = await pergunta("\nDeseja cadastrar outro livro? (s/n): ");
             continuar = resposta.toLowerCase() === 's';
         };
-    } else {
+    } else if (resposta === "2") {
         while (continuar) {
 
             const filmeTitulo = await pergunta("\nDigite o título da obra: ");
@@ -119,6 +124,30 @@ async function listarLivros() {
 
 async function listarFilmes() {
     locadora.listarFilmes();
+    menu();
+}
+
+async function emprestarLivro() {    
+    const livroIndice = await pergunta("\nDigite o número do indíce do livro que você deseja emprestado: ");
+    const indiceLivro = livroIndice - 1
+    user.pegarLivro(biblioteca, indiceLivro)
+    menu();
+}
+
+async function emprestarFilme() {
+    const filmeIndice = await pergunta("\nDigite o número do indíce do livro que você deseja emprestado: ");
+    const indiceFilme = filmeIndice - 1
+    user.pegarFilme(locadora, indiceFilme)
+    menu();
+}
+
+async function listarUserLivros() {
+    user.listarUserLivros();
+    menu();
+}
+
+async function listarUserFilmes() {
+    user.listarUserFilmes();
     menu();
 }
 

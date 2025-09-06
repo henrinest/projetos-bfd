@@ -1,4 +1,3 @@
-const Livro = require('./livro');
 class Biblioteca {
     constructor () {
         this.livrosCadastrados = []
