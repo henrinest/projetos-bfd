@@ -1,15 +1,15 @@
 class Locadora {
     constructor () {
-        this.filmesCadastrados = []
+        this.filmesCadastrados = [];
     }
     adicionarFilme(Filme) {
-        this.filmesCadastrados.push(Filme)
+        this.filmesCadastrados.push(Filme);
     }
     listarFilmes() {
         this.filmesCadastrados.forEach((Filme, index) => {
             console.log(`${index + 1}. ${Filme.titulo} - ${Filme.diretor}`);
         });
-    }
-}
+    };
+};
 
 module.exports = Locadora;

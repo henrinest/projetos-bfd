@@ -11,8 +11,8 @@ const biblioteca = new Biblioteca();
 const locadora = new Locadora();
 
 let user;
-const usuariosCadastrados = []
-const usuarioAtual = user
+const usuariosCadastrados = [];
+const usuarioAtual = user;
 
 const main = readline.createInterface({
     input: process.stdin,
@@ -31,7 +31,7 @@ function pergunta(questao) {
 //Criação da função que expõe o menu de opções para o usuário da aplicação.
 async function menu() {
     console.log(" \n=== Menu ===\n Cadastramento de usuário [1]\n Listar Livros [2]\n Listar Filmes [3]\n Empréstimo de livro [4]\n Empréstimo de filme [5]");
-    console.log(" Cadastrar itens [6]\n Devolução de Filmes [7]\n Listar livros emprestados pelo usuário [8]\n Listar filmes emprestados pelo usuário [9]\n Sair [0]\n");
+    console.log(" Cadastrar itens [6]\n Devolução de itens [7]\n Listar itens emprestados pelo usuário atual [8]\n Sair [0]\n");
     const resposta = await pergunta("[Selecione a opção]: ");
 
     switch (resposta) {
@@ -54,17 +54,17 @@ async function menu() {
             cadastrarItens();
             break;
         case "7":
-            
+            devolverItem()
             break;
         case "8":
-            listarUserLivros();
-            break;
-        case "9":
-            listarUserFilmes();
+            listarUserItens()
             break;
         case "0":
             main.close();
             break;
+        default:
+            console.log("=== Escolha uma das opções listadas no menu inicial. ===");
+            return menu();
     };
 };
 
@@ -74,7 +74,7 @@ async function usuarioCadastro() {
 
     if (isNaN(userName)) {
         user = new Usuario(userName);
-        usuariosCadastrados.push(user)
+        usuariosCadastrados.push(user);
         console.log(`=== Usuário criado: ${user.nome} ===`);
         menu();
     } else {
@@ -91,7 +91,11 @@ async function cadastrarItens() {
         while (continuar) {
 
             const livroTitulo = await pergunta("\nDigite o título da obra: ");
-            const livroAutor = await pergunta("Digite o nome do autor da obra: ");
+            let livroAutor = await pergunta("Digite o nome do autor da obra: ");
+            while (!isNaN(livroAutor)) {
+                console.log("Nome do autor digitado de maneira inválida!\n")
+                livroAutor = await pergunta("Digite o nome do autor da obra: ");
+            }
             newLivro = new Livro(livroTitulo, livroAutor)
             biblioteca.adicionarLivro(newLivro);
 
@@ -104,7 +108,11 @@ async function cadastrarItens() {
         while (continuar) {
 
             const filmeTitulo = await pergunta("\nDigite o título da obra: ");
-            const filmeDiretor = await pergunta("Digite o nome do diretor da obra: ");
+            let filmeDiretor = await pergunta("Digite o nome do diretor da obra: ");
+            while (!isNaN(filmeDiretor)) {
+                console.log("Nome do diretor digitado de maneira inválida!\n")
+                filmeDiretor = await pergunta("Digite o nome do diretor da obra: ");
+            }
             newFilme = new Filme(filmeTitulo, filmeDiretor);
             locadora.adicionarFilme(newFilme);
 
@@ -120,35 +128,43 @@ async function cadastrarItens() {
 async function listarLivros() {
     biblioteca.listarLivros();
     menu();
-}
+};
 
 async function listarFilmes() {
     locadora.listarFilmes();
     menu();
-}
+};
 
-async function emprestarLivro() {    
+async function emprestarLivro() {
+    console.log("Livros registrados na Biblioteca:")
+    biblioteca.listarLivros();   
     const livroIndice = await pergunta("\nDigite o número do indíce do livro que você deseja emprestado: ");
     const indiceLivro = livroIndice - 1;
     user.pegarLivro(biblioteca, indiceLivro);
     menu();
-}
+};
 
 async function emprestarFilme() {
+    console.log("Filmes registrados na Locadora:")
+    locadora.listarFilmes();
     const filmeIndice = await pergunta("\nDigite o número do indíce do livro que você deseja emprestado: ");
     const indiceFilme = filmeIndice - 1;
     user.pegarFilme(locadora, indiceFilme);
     menu();
-}
+};
 
-async function listarUserLivros() {
-    user.listarUserLivros();
+async function devolverItem() {
+    console.log("Itens atualmente em posse do usuário: ");
+    user.listarUserItens();
+    const indice = await pergunta("\nDigite o número do indíce do item que deseja devolver: ");
+    const indiceNum = indice - 1;
+    user.devolverItem(indiceNum);
     menu();
 }
 
-async function listarUserFilmes() {
-    user.listarUserFilmes();
+async function listarUserItens() {
+    user.listarUserItens();
     menu();
-}
+;}
 
 menu();
