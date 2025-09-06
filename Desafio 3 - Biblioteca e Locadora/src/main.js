@@ -91,8 +91,8 @@ async function usuarioCadastro() {
 };
 
 async function trocaUsuario() {
-    console.clear();
     if (user === null) {
+        console.clear();
         console.log("=== Nenhum usuário cadastrado! ===")
         console.log("=== Cadastre um usuário antes de utilizar a opção de troca entre usuários! ===")
         return menu();
@@ -103,22 +103,29 @@ async function trocaUsuario() {
     });
     const indice = await pergunta("\nSelecione o usuário que você deseja utilizar escolhendo o número do indíce apresentado: ");
     const seletorIndice = indice - 1;
+    if (isNaN(seletorIndice)) {
+        console.clear();
+        console.log("=== Número de indíce digitado de maneira inválida! ===");
+        return trocaUsuario();
+    }
     if (seletorIndice < 0 || seletorIndice >= usuariosCadastrados.length) {
         console.log("=== Número índice de usuário digitado é inválido! ===")
         console.log("=== Digite o número do indíce de um usuário que esteja registrado no sistema! ===")
         return menu()
+        
     };
+    console.clear();
     user = usuariosCadastrados[seletorIndice];
     console.log(`=== A troca de usuário para "${user.nome}" foi realizada! ===`);
     return menu();
 };
 
 async function cadastrarItens() {
-    console.clear();
     let continuar = true; //Verificação booleana.
     const resposta = await pergunta("\nDeseja cadastrar um novo Livro [1] ou Filme [2]? ");
 
     if (resposta === "1") {
+        console.clear();
         while (continuar) {
 
             const livroTitulo = await pergunta("\nDigite o título da obra: ");
@@ -136,6 +143,7 @@ async function cadastrarItens() {
             continuar = resposta.toLowerCase() === 's';
         };
     } else if (resposta === "2") {
+        console.clear();
         while (continuar) {
 
             const filmeTitulo = await pergunta("\nDigite o título da obra: ");
@@ -152,7 +160,12 @@ async function cadastrarItens() {
             const resposta = await pergunta("\nDeseja cadastrar outro filme? (s/n): ");
             continuar = resposta.toLowerCase() === 's';
         };
-    };
+    } else {
+        console.clear();
+        console.log("=== A opção digitada é inválida! ===")
+        console.log("=== Digite uma opção válida para realizar o cadastramento dos itens no sistema! ===")
+        return cadastrarItens();
+    }
     return menu();
 };
 
