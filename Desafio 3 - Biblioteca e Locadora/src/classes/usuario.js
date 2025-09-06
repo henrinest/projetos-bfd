@@ -6,9 +6,9 @@ class Usuario {
     pegarLivro(Biblioteca, indiceLivro) {
         const livro = Biblioteca.livrosCadastrados[indiceLivro];
         if (this.itensEmprestados.length >= 3) {
-            console.log("A quantidade de itens que podem ser emprestados foi atingida!")
+            console.log("=== A quantidade de itens que podem ser emprestados foi atingida! ===")
         } else if (livro.emprestado) {
-            console.log("\nLivro se encontra indisponível!")
+            console.log("\n=== Livro se encontra indisponível! ===")
         } else {
             livro.emprestado = true;
             this.itensEmprestados.push(livro);
@@ -17,9 +17,9 @@ class Usuario {
     pegarFilme(Locadora, indiceFilme) {
         const filme = Locadora.filmesCadastrados[indiceFilme];
         if (this.itensEmprestados.length >= 3) {
-            console.log("A quantidade de itens que podem ser emprestados foi atingida!");
+            console.log("=== A quantidade de itens que podem ser emprestados foi atingida! ===");
         } else if (filme.emprestado) {
-            console.log("\nFilme se encontra indisponível!");
+            console.log("\n=== Filme se encontra indisponível! ===");
         } else {
             filme.emprestado = true;
             this.itensEmprestados.push(filme);

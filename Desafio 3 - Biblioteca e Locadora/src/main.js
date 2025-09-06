@@ -78,17 +78,20 @@ async function usuarioCadastro() {
     const userName = await pergunta("Digite seu nome de usuário: ");
 
     if (isNaN(userName)) {
+        console.clear();
         user = new Usuario(userName);
         usuariosCadastrados.push(user);
         console.log(`=== Usuário criado: ${user.nome} ===`);
         return menu();
     } else {
+        console.clear();
         console.log("=== Nome de usuário digitado de maneira inválida, cadastre novamente. ===");
         return usuarioCadastro();
     };
 };
 
 async function trocaUsuario() {
+    console.clear();
     if (user === null) {
         console.log("=== Nenhum usuário cadastrado! ===")
         console.log("=== Cadastre um usuário antes de utilizar a opção de troca entre usuários! ===")
@@ -111,6 +114,7 @@ async function trocaUsuario() {
 };
 
 async function cadastrarItens() {
+    console.clear();
     let continuar = true; //Verificação booleana.
     const resposta = await pergunta("\nDeseja cadastrar um novo Livro [1] ou Filme [2]? ");
 
@@ -153,10 +157,11 @@ async function cadastrarItens() {
 };
 
 async function listarLivros() {
+    console.clear();
     if (biblioteca.livrosCadastrados.length === 0) {
         console.log("=== Nenhum livro registrado! ===")
         console.log("=== Realize o registro de um livro antes de utilizar essa funcionalidade! ===")
-        return menu();    
+        return menu();
     };
     console.log("=== Livros registrados na biblioteca: ===")
     biblioteca.listarLivros();
@@ -164,10 +169,11 @@ async function listarLivros() {
 };
 
 async function listarFilmes() {
+    console.clear();
     if (locadora.filmesCadastrados.length === 0) {
         console.log("=== Nenhum filme registrado! ===")
         console.log("=== Realize o registro de um livro antes de utilizar essa funcionalidade! ===")
-        return menu();    
+        return menu();
     };
     console.log("=== Filmes registrados na locadora: ===")
     locadora.listarFilmes();
@@ -175,36 +181,48 @@ async function listarFilmes() {
 };
 
 async function emprestarLivro() {
+    console.clear();
     if (user === null) {
         console.log("=== Nenhum usuário cadastrado! ===")
         console.log("=== Cadastre um usuário antes de utilizar a opção de empréstimo! ===")
+        return menu();
+    }
+    if (biblioteca.livrosCadastrados.length === 0) {
+        console.log("=== Nenhum livro registrado! ===")
+        console.log("=== Realize o registro de um livro antes de utilizar essa funcionalidade! ===")
         return menu();
     }
     console.log("=== Livros registrados na Biblioteca: ===")
     biblioteca.listarLivros();
     const livroIndice = await pergunta("\n-> Digite o número do indíce do livro que você deseja emprestado: ");
     const indiceLivro = livroIndice - 1;
-    if (indiceLivro < 0 || indiceLivro >= biblioteca.listarLivros.length) {
+    if (indiceLivro < 0 || indiceLivro > biblioteca.listarLivros.length) {
         console.log("=== Número índice digitado é inválido! ===")
         console.log("=== Digite o número do indíce de um livro que esteja registrado no sistema! ===")
         return menu()
     };
     user.pegarLivro(biblioteca, indiceLivro);
     return menu();
-    
+
 };
 
 async function emprestarFilme() {
+    console.clear();
     if (user === null) {
         console.log("=== Nenhum usuário cadastrado! ===")
         console.log("=== Cadastre um usuário antes de utilizar a opção de empréstimo! ===")
+        return menu();
+    }
+    if (locadora.filmesCadastrados.length === 0) {
+        console.log("=== Nenhum filme registrado! ===")
+        console.log("=== Realize o registro de um filme antes de utilizar essa funcionalidade! ===")
         return menu();
     }
     console.log("=== Filmes registrados na Locadora: ===")
     locadora.listarFilmes();
     const filmeIndice = await pergunta("\n-> Digite o número do indíce do livro que você deseja emprestado: ");
     const indiceFilme = filmeIndice - 1;
-    if (indiceFilme < 0 || indiceLivro >= locadora.listarFilmes.length) {
+    if (indiceFilme < 0 || indiceFilme > locadora.listarFilmes.length) {
         console.log("=== Número índice digitado é inválido! ===")
         console.log("=== Digite o número do indíce de um filme que esteja registrado no sistema! ===")
         return menu()
@@ -214,16 +232,22 @@ async function emprestarFilme() {
 };
 
 async function devolverItem() {
-        if (user === null) {
+    console.clear();
+    if (user === null) {
         console.log("=== Nenhum usuário cadastrado! ===")
         console.log("=== Cadastre um usuário antes de utilizar a opção de devolução! ===")
+        return menu();
+    }
+    if (user.itensEmprestados.length === 0) {
+        console.log("=== Nenhum item registrado! ===");
+        console.log("=== Solicite o emrpéstimo de um livro ou filme para que essa funcionalidade possa ser utilizada! ===");
         return menu();
     }
     console.log("=== Itens atualmente em posse do usuário: ===");
     user.listarUserItens();
     const indice = await pergunta("\n-> Digite o número do indíce do item que deseja devolver: ");
     const indiceNum = indice - 1;
-        if (indiceNum < 0 || indiceNum >= user.itensEmprestados.length) {
+    if (indiceNum < 0 || indiceNum >= user.itensEmprestados.length) {
         console.log("=== Número índice digitado é inválido! ===");
         console.log("=== Digite o número do indíce de um livro que esteja registrado no sistema! ===");
         return menu();
@@ -233,6 +257,7 @@ async function devolverItem() {
 }
 
 async function listarUserItens() {
+    console.clear();
     if (user === null) {
         console.log("=== Nenhum usuário cadastrado! ===")
         console.log("=== Cadastre um usuário antes de utilizar a opção de listagem de itens do usuário! ===")
