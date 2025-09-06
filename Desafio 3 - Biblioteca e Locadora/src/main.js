@@ -93,8 +93,8 @@ async function usuarioCadastro() {
 async function trocaUsuario() {
     if (user === null) {
         console.clear();
-        console.log("=== Nenhum usuário cadastrado! ===")
-        console.log("=== Cadastre um usuário antes de utilizar a opção de troca entre usuários! ===")
+        console.log("=== Nenhum usuário cadastrado! ===");
+        console.log("=== Cadastre um usuário antes de utilizar a opção de troca entre usuários! ===");
         return menu();
     }
     console.log("Usuários cadastrados: ");
@@ -109,10 +109,10 @@ async function trocaUsuario() {
         return trocaUsuario();
     }
     if (seletorIndice < 0 || seletorIndice >= usuariosCadastrados.length) {
-        console.log("=== Número índice de usuário digitado é inválido! ===")
-        console.log("=== Digite o número do indíce de um usuário que esteja registrado no sistema! ===")
-        return menu()
-        
+        console.log("=== Número índice de usuário digitado é inválido! ===");
+        console.log("=== Digite o número do indíce de um usuário que esteja registrado no sistema! ===");
+        return menu();
+
     };
     console.clear();
     user = usuariosCadastrados[seletorIndice];
@@ -134,7 +134,7 @@ async function cadastrarItens() {
                 console.log("Nome do autor digitado de maneira inválida!\n")
                 livroAutor = await pergunta("Digite o nome do autor da obra: ");
             }
-            newLivro = new Livro(livroTitulo, livroAutor)
+            newLivro = new Livro(livroTitulo, livroAutor);
             biblioteca.adicionarLivro(newLivro);
 
             console.log(`=== Livro "${livroTitulo}" cadastrado com sucesso! ===`);
@@ -162,8 +162,8 @@ async function cadastrarItens() {
         };
     } else {
         console.clear();
-        console.log("=== A opção digitada é inválida! ===")
-        console.log("=== Digite uma opção válida para realizar o cadastramento dos itens no sistema! ===")
+        console.log("=== A opção digitada é inválida! ===");
+        console.log("=== Digite uma opção válida para realizar o cadastramento dos itens no sistema! ===");
         return cadastrarItens();
     }
     return menu();
@@ -172,11 +172,11 @@ async function cadastrarItens() {
 async function listarLivros() {
     console.clear();
     if (biblioteca.livrosCadastrados.length === 0) {
-        console.log("=== Nenhum livro registrado! ===")
-        console.log("=== Realize o registro de um livro antes de utilizar essa funcionalidade! ===")
+        console.log("=== Nenhum livro registrado! ===");
+        console.log("=== Realize o registro de um livro antes de utilizar essa funcionalidade! ===");
         return menu();
     };
-    console.log("=== Livros registrados na biblioteca: ===")
+    console.log("=== Livros registrados na biblioteca: ===");
     biblioteca.listarLivros();
     return menu();
 };
@@ -188,7 +188,7 @@ async function listarFilmes() {
         console.log("=== Realize o registro de um livro antes de utilizar essa funcionalidade! ===")
         return menu();
     };
-    console.log("=== Filmes registrados na locadora: ===")
+    console.log("=== Filmes registrados na locadora: ===");
     locadora.listarFilmes();
     return menu();
 };
@@ -231,14 +231,14 @@ async function emprestarFilme() {
         console.log("=== Realize o registro de um filme antes de utilizar essa funcionalidade! ===")
         return menu();
     }
-    console.log("=== Filmes registrados na Locadora: ===")
+    console.log("=== Filmes registrados na Locadora: ===");
     locadora.listarFilmes();
     const filmeIndice = await pergunta("\n-> Digite o número do indíce do livro que você deseja emprestado: ");
     const indiceFilme = filmeIndice - 1;
     if (indiceFilme < 0 || indiceFilme > locadora.listarFilmes.length) {
-        console.log("=== Número índice digitado é inválido! ===")
-        console.log("=== Digite o número do indíce de um filme que esteja registrado no sistema! ===")
-        return menu()
+        console.log("=== Número índice digitado é inválido! ===");
+        console.log("=== Digite o número do indíce de um filme que esteja registrado no sistema! ===");
+        return menu();
     };
     user.pegarFilme(locadora, indiceFilme);
     return menu();
@@ -272,8 +272,8 @@ async function devolverItem() {
 async function listarUserItens() {
     console.clear();
     if (user === null) {
-        console.log("=== Nenhum usuário cadastrado! ===")
-        console.log("=== Cadastre um usuário antes de utilizar a opção de listagem de itens do usuário! ===")
+        console.log("=== Nenhum usuário cadastrado! ===");
+        console.log("=== Cadastre um usuário antes de utilizar a opção de listagem de itens do usuário! ===");
         return menu();
     }
     console.log("=== Itens atualmente em posse do usuário: ===");
