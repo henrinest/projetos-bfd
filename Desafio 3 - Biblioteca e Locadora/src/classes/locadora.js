@@ -1,5 +1,5 @@
 class Locadora {
-    constructor () {
+    constructor() {
         this.filmesCadastrados = [];
     }
     adicionarFilme(Filme) {

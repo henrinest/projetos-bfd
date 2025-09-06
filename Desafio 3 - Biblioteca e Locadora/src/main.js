@@ -10,9 +10,8 @@ const Biblioteca = require('./classes/biblioteca');
 const biblioteca = new Biblioteca();
 const locadora = new Locadora();
 
-let user;
+let user = null;
 const usuariosCadastrados = [];
-const usuarioAtual = user;
 
 const main = readline.createInterface({
     input: process.stdin,
@@ -29,9 +28,12 @@ function pergunta(questao) {
 };
 
 //Criação da função que expõe o menu de opções para o usuário da aplicação.
-async function menu() {
+async function menu(userName) {
     console.log(" \n=== Menu ===\n Cadastramento de usuário [1]\n Listar Livros [2]\n Listar Filmes [3]\n Empréstimo de livro [4]\n Empréstimo de filme [5]");
-    console.log(" Cadastrar itens [6]\n Devolução de itens [7]\n Listar itens emprestados pelo usuário atual [8]\n Sair [0]\n");
+    console.log(" Cadastrar itens [6]\n Devolução de itens [7]\n Listar itens emprestados pelo usuário atual [8]\n Realizar troca entre usuários cadastrados [9]\n Sair [0]\n");
+
+    console.log(`Usuário atual: ${user ? `"${user.nome}"` : '"Nenhum"'}\n`); //Exposição do nome do usuário que está utilizando a aplicação no momento.
+
     const resposta = await pergunta("[Selecione a opção]: ");
 
     switch (resposta) {
@@ -59,6 +61,9 @@ async function menu() {
         case "8":
             listarUserItens()
             break;
+        case "9":
+            trocaUsuario()
+            break;
         case "0":
             main.close();
             break;
@@ -76,12 +81,24 @@ async function usuarioCadastro() {
         user = new Usuario(userName);
         usuariosCadastrados.push(user);
         console.log(`=== Usuário criado: ${user.nome} ===`);
-        menu();
+        return menu();
     } else {
         console.log("=== Nome de usuário digitado de maneira inválida, cadastre novamente. ===");
         usuarioCadastro();
     };
 };
+
+async function trocaUsuario() {
+    console.log("Usuários cadastrados: ");
+    usuariosCadastrados.forEach((usuariosCadastrados, index) => {
+        console.log(`${index + 1}. ${usuariosCadastrados.nome}`);
+    });
+    const indice = await pergunta("\nSelecione o usuário que você deseja utilizar escolhendo o número do indíce apresentado: ");
+    const seletorIndice = indice - 1;
+    user = usuariosCadastrados[seletorIndice];
+    console.log(`=== A troca de usuário para "${user.nome}" foi realizada! ===`);
+    menu();
+}
 
 async function cadastrarItens() {
     let continuar = true; //Verificação booleana.
@@ -126,45 +143,49 @@ async function cadastrarItens() {
 };
 
 async function listarLivros() {
+    console.log("=== Livros registrados na biblioteca: ===")
     biblioteca.listarLivros();
     menu();
 };
 
 async function listarFilmes() {
+    console.log("=== Filmes registrados na locadora: ===")
     locadora.listarFilmes();
     menu();
 };
 
 async function emprestarLivro() {
-    console.log("Livros registrados na Biblioteca:")
-    biblioteca.listarLivros();   
-    const livroIndice = await pergunta("\nDigite o número do indíce do livro que você deseja emprestado: ");
+    console.log("=== Livros registrados na Biblioteca: ===")
+    biblioteca.listarLivros();
+    const livroIndice = await pergunta("\n-> Digite o número do indíce do livro que você deseja emprestado: ");
     const indiceLivro = livroIndice - 1;
     user.pegarLivro(biblioteca, indiceLivro);
     menu();
 };
 
 async function emprestarFilme() {
-    console.log("Filmes registrados na Locadora:")
+    console.log("=== Filmes registrados na Locadora: ===")
     locadora.listarFilmes();
-    const filmeIndice = await pergunta("\nDigite o número do indíce do livro que você deseja emprestado: ");
+    const filmeIndice = await pergunta("\n-> Digite o número do indíce do livro que você deseja emprestado: ");
     const indiceFilme = filmeIndice - 1;
     user.pegarFilme(locadora, indiceFilme);
     menu();
 };
 
 async function devolverItem() {
-    console.log("Itens atualmente em posse do usuário: ");
+    console.log("=== Itens atualmente em posse do usuário: ===");
     user.listarUserItens();
-    const indice = await pergunta("\nDigite o número do indíce do item que deseja devolver: ");
+    const indice = await pergunta("\n-> Digite o número do indíce do item que deseja devolver: ");
     const indiceNum = indice - 1;
     user.devolverItem(indiceNum);
     menu();
 }
 
 async function listarUserItens() {
+    console.log("=== Itens atualmente em posse do usuário: ===");
     user.listarUserItens();
     menu();
-;}
+    ;
+}
 
 menu();

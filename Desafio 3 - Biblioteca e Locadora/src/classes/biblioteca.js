@@ -1,5 +1,5 @@
 class Biblioteca {
-    constructor () {
+    constructor() {
         this.livrosCadastrados = [];
     }
     adicionarLivro(Livro) {
