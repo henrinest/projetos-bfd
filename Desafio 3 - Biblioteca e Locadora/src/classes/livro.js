@@ -12,4 +12,4 @@ class Livro {
     };
 };
 
-module.exports = Livro
+module.exports = Livro;

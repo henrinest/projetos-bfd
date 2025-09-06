@@ -45,25 +45,25 @@ async function menu() {
             listarFilmes();
             break;
         case "4":
-            emprestarLivro()
+            emprestarLivro();
             break;
         case "5":
             emprestarFilme();
             break;
         case "6":
-            cadastrarItens()
+            cadastrarItens();
             break;
         case "7":
             
             break;
         case "8":
-            listarUserLivros()
+            listarUserLivros();
             break;
         case "9":
-            listarUserFilmes()
+            listarUserFilmes();
             break;
         case "0":
-            main.close()
+            main.close();
             break;
     };
 };
@@ -129,15 +129,15 @@ async function listarFilmes() {
 
 async function emprestarLivro() {    
     const livroIndice = await pergunta("\nDigite o número do indíce do livro que você deseja emprestado: ");
-    const indiceLivro = livroIndice - 1
-    user.pegarLivro(biblioteca, indiceLivro)
+    const indiceLivro = livroIndice - 1;
+    user.pegarLivro(biblioteca, indiceLivro);
     menu();
 }
 
 async function emprestarFilme() {
     const filmeIndice = await pergunta("\nDigite o número do indíce do livro que você deseja emprestado: ");
-    const indiceFilme = filmeIndice - 1
-    user.pegarFilme(locadora, indiceFilme)
+    const indiceFilme = filmeIndice - 1;
+    user.pegarFilme(locadora, indiceFilme);
     menu();
 }
 

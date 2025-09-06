@@ -17,30 +17,30 @@ class Usuario {
     pegarFilme(Locadora, indiceFilme) {
         const filme = Locadora.filmesCadastrados[indiceFilme];
         if (this.itensEmprestados.length >= 3) {
-            console.log("A quantidade de itens que podem ser emprestados foi atingida!")
+            console.log("A quantidade de itens que podem ser emprestados foi atingida!");
         }
         if (filme.emprestado) {
-            console.log("\nFilme se encontra indisponível!")
+            console.log("\nFilme se encontra indisponível!");
         } else {
-            filme.emprestado = true
-            this.itensEmprestados.push(filme)
+            filme.emprestado = true;
+            this.itensEmprestados.push(filme);
         }
     }
     devolverItem(indiceLivro) {
-        this.itensEmprestados.splice[indiceLivro]
+        this.itensEmprestados.splice[indiceLivro];
     }
     listarUserLivros() {
-        console.log("Livros atualmente emprestados pelo usuário: ")
+        console.log("Livros atualmente emprestados pelo usuário: ");
         this.itensEmprestados.forEach((Livro, index) => {
             console.log(`${index + 1}. ${Livro.titulo} - ${Livro.autor}`);
         });
     }
     listarUserFilmes() {
-        console.log("Filmes atualmente emprestados pelo usuário: ")
+        console.log("Filmes atualmente emprestados pelo usuário: ");
         this.itensEmprestados.forEach((Filme, index) => {
             console.log(`\n${index + 1}. ${Filme.titulo} - ${Filme.diretor}`);
         });
-    }
-}
+    };
+};
 
-module.exports = Usuario
+module.exports = Usuario;

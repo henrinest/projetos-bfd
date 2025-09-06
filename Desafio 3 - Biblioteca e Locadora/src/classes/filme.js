@@ -12,4 +12,4 @@ class Filme {
     };
 };
 
-module.exports = Filme
+module.exports = Filme;
