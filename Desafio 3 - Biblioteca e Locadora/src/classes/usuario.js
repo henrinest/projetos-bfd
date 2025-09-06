@@ -5,15 +5,20 @@ class Usuario {
     }
     pegarLivro(Biblioteca, indiceLivro) {
         const livro = Biblioteca.livrosCadastrados[indiceLivro];
-        if (livro.emprestado) {
+        if (this.itensEmprestados.length >= 3) {
+            console.log("A quantidade de itens que podem ser emprestados foi atingida!")
+        } if (livro.emprestado) {
             console.log("\nLivro se encontra indisponível!")
         } else {
             livro.emprestado = true
-            this.itensEmprestados.push(livro)  
+            this.itensEmprestados.push(livro)
         }
     }
     pegarFilme(Locadora, indiceFilme) {
         const filme = Locadora.filmesCadastrados[indiceFilme];
+        if (this.itensEmprestados.length >= 3) {
+            console.log("A quantidade de itens que podem ser emprestados foi atingida!")
+        }
         if (filme.emprestado) {
             console.log("\nFilme se encontra indisponível!")
         } else {
