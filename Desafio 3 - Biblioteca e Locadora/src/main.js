@@ -209,7 +209,7 @@ async function emprestarLivro() {
     biblioteca.listarLivros();
     const livroIndice = await pergunta("\n-> Digite o número do indíce do livro que você deseja emprestado: ");
     const indiceLivro = livroIndice - 1;
-    if (indiceLivro < 0 || indiceLivro > biblioteca.listarLivros.length) {
+    if (indiceLivro < 0 || indiceLivro > biblioteca.livrosCadastrados.length) {
         console.log("=== Número índice digitado é inválido! ===")
         console.log("=== Digite o número do indíce de um livro que esteja registrado no sistema! ===")
         return menu()
@@ -235,7 +235,7 @@ async function emprestarFilme() {
     locadora.listarFilmes();
     const filmeIndice = await pergunta("\n-> Digite o número do indíce do livro que você deseja emprestado: ");
     const indiceFilme = filmeIndice - 1;
-    if (indiceFilme < 0 || indiceFilme > locadora.listarFilmes.length) {
+    if (indiceFilme < 0 || indiceFilme > locadora.filmesCadastrados.length) {
         console.log("=== Número índice digitado é inválido! ===");
         console.log("=== Digite o número do indíce de um filme que esteja registrado no sistema! ===");
         return menu();
@@ -247,8 +247,8 @@ async function emprestarFilme() {
 async function devolverItem() {
     console.clear();
     if (user === null) {
-        console.log("=== Nenhum usuário cadastrado! ===")
-        console.log("=== Cadastre um usuário antes de utilizar a opção de devolução! ===")
+        console.log("=== Nenhum usuário cadastrado! ===");
+        console.log("=== Cadastre um usuário antes de utilizar a opção de devolução! ===");
         return menu();
     }
     if (user.itensEmprestados.length === 0) {
