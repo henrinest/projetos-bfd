@@ -282,6 +282,11 @@ async function listarUserItens() {
         console.log("=== Cadastre um usuário antes de utilizar a opção de listagem de itens do usuário! ===");
         return menu();
     }
+    if (user.itensEmprestados.length === 0) {
+        console.log("=== Nenhum item registrado! ===");
+        console.log("=== Solicite o empréstimo de um livro ou filme para que essa funcionalidade possa ser utilizada! ===");
+        return menu();
+    }
     console.log("=== Itens atualmente em posse do usuário: ===");
     user.listarUserItens();
     return menu();
