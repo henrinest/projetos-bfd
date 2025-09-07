@@ -33,39 +33,49 @@ async function menu(userName) {
     console.log(" \n=== Menu ===\n Cadastramento de usuário [1]\n Listar Livros [2]\n Listar Filmes [3]\n Empréstimo de livro [4]\n Empréstimo de filme [5]");
     console.log(" Cadastrar itens [6]\n Devolução de itens [7]\n Listar itens emprestados pelo usuário atual [8]\n Realizar troca entre usuários cadastrados [9]\n Sair [0]\n");
 
-    console.log(`Usuário atual: ${user ? `"${user.nome}"` : '"Nenhum"'}\n`); //Exposição do nome do usuário que está utilizando a aplicação no momento.
+    console.log(`Usuário atual: ${user ? `"${user.nome}"` : 'Nenhum'}\n`); //Exposição do nome do usuário que está utilizando a aplicação no momento.
 
     const resposta = await pergunta("[Selecione a opção]: ");
 
     switch (resposta) {
         case "1":
+            console.clear();
             usuarioCadastro();
             break;
         case "2":
+            console.clear();
             listarLivros();
             break;
         case "3":
+            console.clear();
             listarFilmes();
             break;
         case "4":
+            console.clear();
             emprestarLivro();
             break;
         case "5":
+            console.clear();
             emprestarFilme();
             break;
         case "6":
+            console.clear();
             cadastrarItens();
             break;
         case "7":
+            console.clear();
             devolverItem();
             break;
         case "8":
+            console.clear();
             listarUserItens();
             break;
         case "9":
+            console.clear();
             trocaUsuario();
             break;
         case "0":
+            console.clear();
             main.close();
             break;
         default:
@@ -80,13 +90,11 @@ async function usuarioCadastro() {
     const userName = await pergunta("Digite seu nome de usuário: ");
 
     if (isNaN(userName)) {
-        console.clear();
         user = new Usuario(userName);
         usuariosCadastrados.push(user);
         console.log(`=== Usuário criado: ${user.nome} ===`);
         return menu();
     } else {
-        console.clear();
         console.log("=== Nome de usuário digitado de maneira inválida, cadastre novamente. ===");
         return usuarioCadastro();
     };
@@ -95,12 +103,10 @@ async function usuarioCadastro() {
 //Função criada para possibilitar a troca em usuários previamente cadastrados.
 async function trocaUsuario() {
     if (user === null) {
-        console.clear();
         console.log("=== Nenhum usuário cadastrado! ===");
         console.log("=== Cadastre um usuário antes de utilizar a opção de troca entre usuários! ===");
         return menu();
     }
-    console.clear();
     console.log("Usuários cadastrados: ");
     usuariosCadastrados.forEach((usuariosCadastrados, index) => {
         console.log(`${index + 1}. ${usuariosCadastrados.nome}`);
@@ -108,7 +114,6 @@ async function trocaUsuario() {
     const indice = await pergunta("\nSelecione o usuário que você deseja utilizar escolhendo o número do indíce apresentado: ");
     const seletorIndice = indice - 1;
     if (isNaN(seletorIndice)) {
-        console.clear();
         console.log("=== Número de indíce digitado de maneira inválida! ===");
         return trocaUsuario();
     }
@@ -118,7 +123,6 @@ async function trocaUsuario() {
         return menu();
 
     };
-    console.clear();
     user = usuariosCadastrados[seletorIndice];
     console.log(`=== A troca de usuário para "${user.nome}" foi realizada! ===`);
     return menu();
@@ -130,7 +134,6 @@ async function cadastrarItens() {
     const resposta = await pergunta("\nDeseja cadastrar um novo Livro [1] ou Filme [2]? ");
 
     if (resposta === "1") {
-        console.clear();
         while (continuar) {
 
             const livroTitulo = await pergunta("\nDigite o título da obra: ");
@@ -148,7 +151,6 @@ async function cadastrarItens() {
             continuar = resposta.toLowerCase() === 's';
         };
     } else if (resposta === "2") {
-        console.clear();
         while (continuar) {
 
             const filmeTitulo = await pergunta("\nDigite o título da obra: ");
@@ -166,7 +168,6 @@ async function cadastrarItens() {
             continuar = resposta.toLowerCase() === 's';
         };
     } else {
-        console.clear();
         console.log("=== A opção digitada é inválida! ===");
         console.log("=== Digite uma opção válida para realizar o cadastramento dos itens no sistema! ===");
         return cadastrarItens();
@@ -176,7 +177,6 @@ async function cadastrarItens() {
 
 //Listagem dos livros previamente cadastrados.
 async function listarLivros() {
-    console.clear();
     if (biblioteca.livrosCadastrados.length === 0) {
         console.log("=== Nenhum livro registrado! ===");
         console.log("=== Realize o registro de um livro antes de utilizar essa funcionalidade! ===");
@@ -189,7 +189,6 @@ async function listarLivros() {
 
 //Listagem dos filmes previamente cadastrados.
 async function listarFilmes() {
-    console.clear();
     if (locadora.filmesCadastrados.length === 0) {
         console.log("=== Nenhum filme registrado! ===")
         console.log("=== Realize o registro de um livro antes de utilizar essa funcionalidade! ===")
@@ -202,7 +201,6 @@ async function listarFilmes() {
 
 //Função que possibilita que um usuário, previamente cadastrado possa solicitar o empréstimo de um livro.
 async function emprestarLivro() {
-    console.clear();
     if (user === null) {
         console.log("=== Nenhum usuário cadastrado! ===");
         console.log("=== Cadastre um usuário antes de utilizar a opção de empréstimo! ===");
@@ -229,7 +227,6 @@ async function emprestarLivro() {
 
 //Função que possibilita que um usuário, previamente cadastrado possa solicitar o empréstimo de um filme.
 async function emprestarFilme() {
-    console.clear();
     if (user === null) {
         console.log("=== Nenhum usuário cadastrado! ===")
         console.log("=== Cadastre um usuário antes de utilizar a opção de empréstimo! ===")
@@ -242,7 +239,7 @@ async function emprestarFilme() {
     }
     console.log("=== Filmes registrados na Locadora: ===");
     locadora.listarFilmes();
-    const filmeIndice = await pergunta("\n-> Digite o número do indíce do livro que você deseja emprestado: ");
+    const filmeIndice = await pergunta("\n-> Digite o número do indíce do filme que você deseja emprestado: ");
     const indiceFilme = filmeIndice - 1;
     if (indiceFilme < 0 || indiceFilme >= locadora.filmesCadastrados.length) {
         console.log("=== Número índice digitado é inválido! ===");
@@ -255,7 +252,6 @@ async function emprestarFilme() {
 
 //Função que permite a devolução de um item (livros ou filmes) armazenado no array itensEmprestados, da classe Usuario.
 async function devolverItem() {
-    console.clear();
     if (user === null) {
         console.log("=== Nenhum usuário cadastrado! ===");
         console.log("=== Cadastre um usuário antes de utilizar a opção de devolução! ===");
@@ -263,7 +259,7 @@ async function devolverItem() {
     }
     if (user.itensEmprestados.length === 0) {
         console.log("=== Nenhum item registrado! ===");
-        console.log("=== Solicite o emrpéstimo de um livro ou filme para que essa funcionalidade possa ser utilizada! ===");
+        console.log("=== Solicite o empréstimo de um livro ou filme para que essa funcionalidade possa ser utilizada! ===");
         return menu();
     }
     console.log("=== Itens atualmente em posse do usuário: ===");
@@ -274,14 +270,13 @@ async function devolverItem() {
         console.log("=== Número índice digitado é inválido! ===");
         console.log("=== Digite o número do indíce de um livro que esteja registrado no sistema! ===");
         return menu();
-    };
+    }
     user.devolverItem(indiceNum);
     return menu();
 }
 
 //Função que permite a visualização dos itens (livros e filmes) armazenados no array itensEmprestados, da classe Usuario.
 async function listarUserItens() {
-    console.clear();
     if (user === null) {
         console.log("=== Nenhum usuário cadastrado! ===");
         console.log("=== Cadastre um usuário antes de utilizar a opção de listagem de itens do usuário! ===");
