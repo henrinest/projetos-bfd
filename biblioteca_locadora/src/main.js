@@ -114,12 +114,12 @@ async function trocaUsuario() {
     const indice = await pergunta("\nSelecione o usuário que você deseja utilizar escolhendo o número do indíce apresentado: ");
     const seletorIndice = indice - 1;
     if (isNaN(seletorIndice)) {
-        console.log("=== Número de indíce digitado de maneira inválida! ===");
+        console.log("=== Número de índice digitado de maneira inválida! ===");
         return trocaUsuario();
     }
     if (seletorIndice < 0 || seletorIndice >= usuariosCadastrados.length) {
         console.log("=== Número índice de usuário digitado é inválido! ===");
-        console.log("=== Digite o número do indíce de um usuário que esteja registrado no sistema! ===");
+        console.log("=== Digite o número do índice de um usuário que esteja registrado no sistema! ===");
         return menu();
 
     };
@@ -217,7 +217,7 @@ async function emprestarLivro() {
     const indiceLivro = livroIndice - 1;
     if (indiceLivro < 0 || indiceLivro >= biblioteca.livrosCadastrados.length) {
         console.log("=== Número índice digitado é inválido! ===");
-        console.log("=== Digite o número do indíce de um livro que esteja registrado no sistema! ===");
+        console.log("=== Digite o número do índice de um livro que esteja registrado no sistema! ===");
         return menu();
     };
     user.pegarLivro(biblioteca, indiceLivro);
@@ -243,7 +243,7 @@ async function emprestarFilme() {
     const indiceFilme = filmeIndice - 1;
     if (indiceFilme < 0 || indiceFilme >= locadora.filmesCadastrados.length) {
         console.log("=== Número índice digitado é inválido! ===");
-        console.log("=== Digite o número do indíce de um filme que esteja registrado no sistema! ===");
+        console.log("=== Digite o número do índice de um filme que esteja registrado no sistema! ===");
         return menu();
     };
     user.pegarFilme(locadora, indiceFilme);
@@ -264,11 +264,11 @@ async function devolverItem() {
     }
     console.log("=== Itens atualmente em posse do usuário: ===");
     user.listarUserItens();
-    const indice = await pergunta("\n-> Digite o número do indíce do item que deseja devolver: ");
+    const indice = await pergunta("\n-> Digite o número do índice do item que deseja devolver: ");
     const indiceNum = indice - 1;
     if (indiceNum < 0 || indiceNum >= user.itensEmprestados.length) {
         console.log("=== Número índice digitado é inválido! ===");
-        console.log("=== Digite o número do indíce de um livro que esteja registrado no sistema! ===");
+        console.log("=== Digite o número do índice de um livro que esteja registrado no sistema! ===");
         return menu();
     }
     user.devolverItem(indiceNum);
