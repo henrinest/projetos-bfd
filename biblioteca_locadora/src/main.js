@@ -10,6 +10,7 @@ const Biblioteca = require('./classes/biblioteca');
 const biblioteca = new Biblioteca();
 const locadora = new Locadora();
 
+//Declaração de constantes e varivavéis globais para o armazenamento de informações do usuário da aplicação.
 let user = null;
 const usuariosCadastrados = [];
 
@@ -74,7 +75,7 @@ async function menu(userName) {
     };
 };
 
-// Função para cadastro de usuário, o cadastro fica registrado como um objeto na classe "Usuario".
+//Função para cadastro de usuário, o cadastro fica registrado como um objeto na classe "Usuario".
 async function usuarioCadastro() {
     const userName = await pergunta("Digite seu nome de usuário: ");
 
@@ -91,6 +92,7 @@ async function usuarioCadastro() {
     };
 };
 
+//Função criada para possibilitar a troca em usuários previamente cadastrados.
 async function trocaUsuario() {
     if (user === null) {
         console.clear();
@@ -122,6 +124,7 @@ async function trocaUsuario() {
     return menu();
 };
 
+//Funcionalidade que permite o cadastramento separado de livros e filmes.
 async function cadastrarItens() {
     let continuar = true; //Verificação booleana.
     const resposta = await pergunta("\nDeseja cadastrar um novo Livro [1] ou Filme [2]? ");
@@ -171,6 +174,7 @@ async function cadastrarItens() {
     return menu();
 };
 
+//Listagem dos livros previamente cadastrados.
 async function listarLivros() {
     console.clear();
     if (biblioteca.livrosCadastrados.length === 0) {
@@ -183,6 +187,7 @@ async function listarLivros() {
     return menu();
 };
 
+//Listagem dos filmes previamente cadastrados.
 async function listarFilmes() {
     console.clear();
     if (locadora.filmesCadastrados.length === 0) {
@@ -195,6 +200,7 @@ async function listarFilmes() {
     return menu();
 };
 
+//Função que possibilita que um usuário, previamente cadastrado possa solicitar o empréstimo de um livro.
 async function emprestarLivro() {
     console.clear();
     if (user === null) {
@@ -221,6 +227,7 @@ async function emprestarLivro() {
 
 };
 
+//Função que possibilita que um usuário, previamente cadastrado possa solicitar o empréstimo de um filme.
 async function emprestarFilme() {
     console.clear();
     if (user === null) {
@@ -246,6 +253,7 @@ async function emprestarFilme() {
     return menu();
 };
 
+//Função que permite a devolução de um item (livros ou filmes) armazenado no array itensEmprestados, da classe Usuario.
 async function devolverItem() {
     console.clear();
     if (user === null) {
@@ -271,6 +279,7 @@ async function devolverItem() {
     return menu();
 }
 
+//Função que permite a visualização dos itens (livros e filmes) armazenados no array itensEmprestados, da classe Usuario.
 async function listarUserItens() {
     console.clear();
     if (user === null) {
@@ -284,4 +293,5 @@ async function listarUserItens() {
     ;
 }
 
+//Chama a função principal, disponibilizando um menu seletor para o usuário da aplicação.
 menu();
