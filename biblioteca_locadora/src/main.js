@@ -98,6 +98,7 @@ async function trocaUsuario() {
         console.log("=== Cadastre um usuário antes de utilizar a opção de troca entre usuários! ===");
         return menu();
     }
+    console.clear();
     console.log("Usuários cadastrados: ");
     usuariosCadastrados.forEach((usuariosCadastrados, index) => {
         console.log(`${index + 1}. ${usuariosCadastrados.nome}`);
