@@ -142,7 +142,7 @@ async function cadastrarItens() {
                 console.log("Nome do autor digitado de maneira inválida!\n")
                 livroAutor = await pergunta("Digite o nome do autor da obra: ");
             }
-            newLivro = new Livro(livroTitulo, livroAutor);
+            const newLivro = new Livro(livroTitulo, livroAutor);
             biblioteca.adicionarLivro(newLivro);
 
             console.log(`=== Livro "${livroTitulo}" cadastrado com sucesso! ===`);
@@ -159,7 +159,7 @@ async function cadastrarItens() {
                 console.log("Nome do diretor digitado de maneira inválida!\n")
                 filmeDiretor = await pergunta("Digite o nome do diretor da obra: ");
             }
-            newFilme = new Filme(filmeTitulo, filmeDiretor);
+            const newFilme = new Filme(filmeTitulo, filmeDiretor);
             locadora.adicionarFilme(newFilme);
 
             console.log(`\n=== Filme "${filmeTitulo}" cadastrado com sucesso! ===`);
