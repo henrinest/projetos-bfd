@@ -6,8 +6,8 @@
   "scripts": {
     "start": "node src/main.js"
   },
-  "keywords": [],
   "type": "module",
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
