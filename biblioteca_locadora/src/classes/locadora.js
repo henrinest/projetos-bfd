@@ -12,4 +12,4 @@ class Locadora {
     };
 };
 
-module.exports = Locadora;
+export default Locadora;

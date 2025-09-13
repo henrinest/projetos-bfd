@@ -12,4 +12,4 @@ class Biblioteca {
     };
 };
 
-module.exports = Biblioteca;
+export default Biblioteca;

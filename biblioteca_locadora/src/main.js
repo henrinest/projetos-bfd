@@ -1,10 +1,10 @@
 //Exportação do readline e das classes para utilização no arquivo principal.
-const readline = require("readline");
-const Usuario = require('./classes/usuario');
-const Livro = require('./classes/livro');
-const Filme = require('./classes/filme');
-const Locadora = require('./classes/locadora');
-const Biblioteca = require('./classes/biblioteca');
+import readline from "readline";
+import Usuario from './classes/usuario.js';
+import Livro from './classes/livro.js';
+import Filme from './classes/filme.js';
+import Locadora from './classes/locadora.js';
+import Biblioteca from './classes/biblioteca.js';
 
 //Criação dos objetos Biblioteca e Locadora, que não possuem atributos principais.
 const biblioteca = new Biblioteca();
