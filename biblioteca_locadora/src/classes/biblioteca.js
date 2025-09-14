@@ -7,7 +7,13 @@ class Biblioteca {
     }
     listarLivros() {
         this.livrosCadastrados.forEach((livro, index) => {
-            console.log(`${index + 1}. ${livro.titulo} - ${livro.autor}`);
+            let status;
+            if (livro.emprestado) {
+                status = "Indisponível";
+            } else {
+                status = "Disponível";
+            }
+            console.log(`${index + 1}. ${livro.titulo} - ${livro.autor} - [${status}]`);
         });
     };
 };

@@ -7,7 +7,13 @@ class Locadora {
     }
     listarFilmes() {
         this.filmesCadastrados.forEach((Filme, index) => {
-            console.log(`${index + 1}. ${Filme.titulo} - ${Filme.diretor}`);
+            let status;
+            if (Filme.emprestado) {
+                status = "Indisponível";
+            } else {
+                status = "Disponível";
+            }
+            console.log(`${index + 1}. ${Filme.titulo} - ${Filme.diretor} - [${status}]`);
         });
     };
 };
