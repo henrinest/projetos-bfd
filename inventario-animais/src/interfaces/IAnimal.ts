@@ -1,7 +1,6 @@
 export interface IAnimal {
-    nome: string;
-    idade: number;
-    
-    emitirSom(): void;
-    mover(): void;
-} 
+nome: string;
+idade: number;
+emitirSom(): void;
+mover(): void;
+};

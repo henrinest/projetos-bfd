@@ -1,3 +1,4 @@
+// Mamifero.ts
 import { Animal } from "./Animal.js";
 
 export class Mamifero extends Animal {
