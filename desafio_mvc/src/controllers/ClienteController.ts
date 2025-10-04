@@ -1,3 +1,4 @@
+import type { Request, Response } from "express";
 import { Cliente } from "../models/Cliente.js";
 import { ClienteView } from "../views/ClienteView.js";
 
@@ -16,8 +17,8 @@ export class ClienteController {
         this.clientes.push(novoCliente);
         this.view.exibirMensagem("Cliente cadastrado com sucesso!");
     }
-    listarClientes(): void {
-        this.view.listarClientes(this.clientes);
+    listarClientes(req: Request, res: Response): void {
+        this.view.listarClientes(this.clientes, res);
     }
     consultarCliente(email: string): void {
         const cliente = this.clientes.find(cliente => cliente.email === cliente.email);
