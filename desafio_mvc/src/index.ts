@@ -9,7 +9,7 @@ const router = Router();
 const view = new ClienteView();
 const controller = new ClienteController(view);
 
-router.get("/clients", (req, res) => controller.listarClientes(req, res))
+router.get("/clients", (req, res) => controller.listarClientes(req, res));
 
 // Cadastro de clientes e solicitação de transferência:
 controller.cadastrarCliente("Thauan", "thauan@email.com", 1000);
